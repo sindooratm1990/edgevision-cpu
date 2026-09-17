@@ -1,0 +1,27 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# macOS
+.DS_Store
+
+# Ultralytics output
+runs/
+
+# Generated and downloaded models
+*.pt
+*.onnx
+
+# Video data and generated output
+data/*.mp4
+data/*.mov
+data/*.avi
+results/**/*.mp4
+results/**/*.mov
+results/**/*.avi
+
+# IDE
+.vscode/
+.idea/

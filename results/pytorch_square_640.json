@@ -1,0 +1,50 @@
+{
+  "model": "yolo11n.pt",
+  "source": "data/test_video.mp4",
+  "device": "cpu",
+  "requested_imgsz": 640,
+  "confidence_threshold": 0.4,
+  "warmup_frames": 10,
+  "measured_frames": 300,
+  "wall_time_seconds": 8.2537,
+  "end_to_end_fps": 36.35,
+  "pipeline_latency_ms": {
+    "mean": 27.487,
+    "median": 27.281,
+    "p95": 28.871,
+    "p99": 31.119,
+    "minimum": 26.17,
+    "maximum": 32.279
+  },
+  "preprocess_latency_ms": {
+    "mean": 0.768,
+    "p95": 0.805
+  },
+  "inference_latency_ms": {
+    "mean": 25.803,
+    "p95": 27.181
+  },
+  "postprocess_latency_ms": {
+    "mean": 0.302,
+    "p95": 0.334
+  },
+  "memory_mb": {
+    "mean_rss": 550.76,
+    "peak_rss": 553.34
+  },
+  "cpu": {
+    "logical_cpu_count": 10,
+    "core_equivalents": 2.91,
+    "total_capacity_percent": 29.12
+  },
+  "detections": {
+    "mean_per_frame": 8.2,
+    "total": 2461,
+    "classes": {
+      "car": 2376,
+      "truck": 59,
+      "bus": 16,
+      "person": 10
+    }
+  }
+}
