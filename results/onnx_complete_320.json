@@ -1,0 +1,105 @@
+{
+  "runtime": "onnxruntime",
+  "provider": [
+    "CPUExecutionProvider"
+  ],
+  "model": "models/yolo11n_320.onnx",
+  "model_size_mb": 10.12,
+  "source": "data/test_video.mp4",
+  "requested_imgsz": 320,
+  "input_shape": [
+    1,
+    3,
+    320,
+    320
+  ],
+  "output_shape": [
+    1,
+    84,
+    2100
+  ],
+  "confidence_threshold": 0.4,
+  "nms_iou_threshold": 0.45,
+  "configured_threads": "runtime_default",
+  "model_load_ms": 45.457,
+  "warmup_frames": 10,
+  "measured_frames": 300,
+  "wall_time_seconds": 2.4814,
+  "end_to_end_fps": 120.9,
+  "decode_latency_ms": {
+    "mean": 1.352,
+    "median": 1.242,
+    "p95": 1.817,
+    "p99": 2.401,
+    "minimum": 0.773,
+    "maximum": 7.089
+  },
+  "preprocess_latency_ms": {
+    "mean": 0.658,
+    "median": 0.675,
+    "p95": 0.789,
+    "p99": 0.874,
+    "minimum": 0.318,
+    "maximum": 1.106
+  },
+  "inference_latency_ms": {
+    "mean": 5.798,
+    "median": 6.029,
+    "p95": 6.717,
+    "p99": 7.654,
+    "minimum": 4.196,
+    "maximum": 13.772
+  },
+  "postprocess_latency_ms": {
+    "mean": 0.435,
+    "median": 0.517,
+    "p95": 0.634,
+    "p99": 0.729,
+    "minimum": 0.189,
+    "maximum": 1.039
+  },
+  "pipeline_latency_ms": {
+    "mean": 8.244,
+    "median": 8.453,
+    "p95": 9.687,
+    "p99": 11.509,
+    "minimum": 5.611,
+    "maximum": 16.799
+  },
+  "memory_mb": {
+    "mean_rss": 251.27,
+    "peak_rss": 252.05
+  },
+  "cpu": {
+    "logical_cpu_count": 10,
+    "core_equivalents": 5.77,
+    "total_capacity_percent": 57.74
+  },
+  "detections": {
+    "mean_per_frame": 3.65,
+    "minimum_per_frame": 0,
+    "maximum_per_frame": 7,
+    "total": 1096,
+    "classes": {
+      "car": 1081,
+      "bus": 9,
+      "truck": 6
+    }
+  },
+  "pipeline_scope": [
+    "video_decode",
+    "preprocess",
+    "onnx_inference",
+    "confidence_filtering",
+    "output_decoding",
+    "class_aware_nms",
+    "coordinate_mapping"
+  ],
+  "excluded_from_pipeline": [
+    "drawing_boxes",
+    "display",
+    "video_encoding",
+    "mqtt_publishing",
+    "sqlite_persistence"
+  ]
+}
