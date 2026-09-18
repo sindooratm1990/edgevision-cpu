@@ -66,6 +66,12 @@ def parse_arguments():
         required=True,
         help="Output JSON file",
     )
+    parser.add_argument(
+        "--iou",
+        type=float,
+        default=0.45,
+        help="NMS IoU threshold",
+    )  
 
     return parser.parse_args()
 
@@ -99,6 +105,7 @@ def main():
             device="cpu",
             imgsz=args.imgsz,
             conf=args.conf,
+            iou=args.iou,
             stream=True,
             verbose=False,
             save=False,
@@ -187,7 +194,9 @@ def main():
         "source": str(source_path),
         "device": "cpu",
         "requested_imgsz": args.imgsz,
+	"input_mode": "square",
         "confidence_threshold": args.conf,
+        "nms_iou_threshold": args.iou,
         "warmup_frames": args.warmup,
         "measured_frames": measured_frames,
         "wall_time_seconds": round(wall_time_seconds, 4),

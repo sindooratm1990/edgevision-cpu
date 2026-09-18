@@ -168,3 +168,37 @@ A future benchmark will run both runtimes with identical square inputs and equiv
 
 These results were measured on an Apple M4 development system and do not represent Raspberry Pi, Cradlepoint or production router performance. Target-device benchmarking is required before making deployment claims.
 
+## INT8 Quantization Experiment
+
+Static post-training quantization was evaluated using ONNX Runtime on an
+Apple M4 CPU. The YOLO detection head was retained in FP32 because fully
+quantizing the model caused all class-confidence outputs to become zero.
+
+Both mixed-precision models were calibrated using 6,000 sequential frames.
+FP32, U8U8 and S8S8 models were benchmarked over the same 3,000-frame video
+segment at 640 × 640 with two ONNX Runtime CPU threads.
+
+| Metric | FP32 | U8U8 | S8S8 |
+|---|---:|---:|---:|
+| Mean inference latency | 16.69 ms | 18.57 ms | 17.46 ms |
+| Mean pipeline latency | 18.66 ms | 20.56 ms | 19.41 ms |
+| Throughput | 53.53 FPS | 48.58 FPS | 51.46 FPS |
+| Peak RSS | 349.70 MB | 283.53 MB | 276.38 MB |
+| Total detections | 27,972 | 27,911 | 26,532 |
+| Person detections | 45 | 34 | 25 |
+| Truck detections | 2,333 | 1,516 | 1,590 |
+| Motorcycle detections | 15 | 7 | 3 |
+
+U8U8 reduced peak memory by 18.9%, while S8S8 reduced it by 21.0%.
+Neither INT8 variant improved inference speed on Apple M4. Both models also
+introduced class-level detection drift, particularly for people, trucks and
+motorcycles.
+
+The aggregate detection count was insufficient for evaluating model
+equivalence because increases in car and bus detections concealed losses in
+other classes. These counts measure agreement with FP32 predictions rather
+than true precision or recall because labeled ground-truth annotations were
+not available.
+
+FP32 ONNX Runtime with two CPU threads was therefore retained as the selected
+configuration.

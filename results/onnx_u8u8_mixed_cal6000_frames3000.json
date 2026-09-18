@@ -1,0 +1,109 @@
+{
+  "runtime": "onnxruntime",
+  "provider": [
+    "CPUExecutionProvider"
+  ],
+  "model": "models/yolo11n_640_u8u8_mixed_cal9184.onnx",
+  "model_size_mb": 4.36,
+  "source": "data/test_video.mp4",
+  "requested_imgsz": 640,
+  "input_shape": [
+    1,
+    3,
+    640,
+    640
+  ],
+  "output_shape": [
+    1,
+    84,
+    8400
+  ],
+  "confidence_threshold": 0.4,
+  "nms_iou_threshold": 0.45,
+  "configured_threads": 2,
+  "model_load_ms": 61.875,
+  "warmup_frames": 10,
+  "measured_frames": 3000,
+  "wall_time_seconds": 61.7519,
+  "end_to_end_fps": 48.58,
+  "decode_latency_ms": {
+    "mean": 0.658,
+    "median": 0.638,
+    "p95": 0.771,
+    "p99": 0.885,
+    "minimum": 0.574,
+    "maximum": 9.762
+  },
+  "preprocess_latency_ms": {
+    "mean": 0.674,
+    "median": 0.66,
+    "p95": 0.749,
+    "p99": 0.947,
+    "minimum": 0.606,
+    "maximum": 1.946
+  },
+  "inference_latency_ms": {
+    "mean": 18.565,
+    "median": 18.494,
+    "p95": 18.886,
+    "p99": 19.965,
+    "minimum": 17.814,
+    "maximum": 36.2
+  },
+  "postprocess_latency_ms": {
+    "mean": 0.666,
+    "median": 0.665,
+    "p95": 0.721,
+    "p99": 0.78,
+    "minimum": 0.581,
+    "maximum": 1.737
+  },
+  "pipeline_latency_ms": {
+    "mean": 20.563,
+    "median": 20.462,
+    "p95": 21.067,
+    "p99": 22.296,
+    "minimum": 19.787,
+    "maximum": 47.151
+  },
+  "memory_mb": {
+    "mean_rss": 280.13,
+    "peak_rss": 283.53
+  },
+  "cpu": {
+    "logical_cpu_count": 10,
+    "core_equivalents": 2.29,
+    "total_capacity_percent": 22.93
+  },
+  "detections": {
+    "mean_per_frame": 9.3,
+    "minimum_per_frame": 1,
+    "maximum_per_frame": 18,
+    "total": 27911,
+    "classes": {
+      "car": 25228,
+      "truck": 1516,
+      "bus": 1119,
+      "person": 34,
+      "motorcycle": 7,
+      "potted plant": 6,
+      "train": 1
+    }
+  },
+  "pipeline_scope": [
+    "video_decode",
+    "preprocess",
+    "onnx_inference",
+    "confidence_filtering",
+    "output_decoding",
+    "class_aware_nms",
+    "coordinate_mapping"
+  ],
+  "excluded_from_pipeline": [
+    "drawing_boxes",
+    "display",
+    "video_encoding",
+    "mqtt_publishing",
+    "sqlite_persistence"
+  ]
+}
